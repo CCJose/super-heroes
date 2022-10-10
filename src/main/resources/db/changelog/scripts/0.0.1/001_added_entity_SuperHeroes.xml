@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <!--
+        Added superheros sequence
+    -->
+    <changeSet id="0.0.1-001-1" author="jose">
+        <createSequence sequenceName="superheroes_sq" startValue="1" />
+    </changeSet>
+
+    <!--
+        Added the entity superheroes.
+    -->
+    <changeSet id="0.0.1-001-2" author="jose" >
+        <createTable tableName="superheroes" remarks="Super Hero entity   ">
+            <column name="id" type="bigint" remarks="The id">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="name" type="varchar(255)" remarks="The name.">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--
+        Added data to the superheros entity.
+    -->
+    <changeSet id="0.0.1-001-3" author="jose" >
+        <loadData file="db/changelog/data/0.0.1/superheroes.csv" separator=";" tableName="superheroes">
+            <column name="id" type="bigint"/>
+            <column name="name" type="string"/>
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>
