@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,6 @@ public class SuperheroController {
     private final SuperheroService superheroService;
 
     @GetMapping("/superheroes")
-    @CrossOrigin(origins = "http://localhost:8081")
     public ResponseEntity<List<Superhero>> findAll(
             @RequestParam(name = "name.contains", defaultValue = "", required = false) String name
     ) {
@@ -30,7 +30,7 @@ public class SuperheroController {
     }
 
     @PutMapping("/superheroes/{id}")
-    public ResponseEntity<Superhero> findOne(@PathVariable Long id, @RequestBody Superhero superhero) {
+    public ResponseEntity<Superhero> findOne(@PathVariable Long id, @RequestBody @Valid Superhero superhero) {
         return ResponseEntity.ok(superheroService.update(id, superhero));
     }
 

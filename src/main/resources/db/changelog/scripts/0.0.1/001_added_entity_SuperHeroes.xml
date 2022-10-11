@@ -6,14 +6,14 @@
 
 
     <!--
-        Added superheros sequence
+        Added superheroes sequence.
     -->
     <changeSet id="0.0.1-001-1" author="jose">
         <createSequence sequenceName="superheroes_sq" startValue="1" />
     </changeSet>
 
     <!--
-        Added the entity superheroes.
+        Added the superheroes entity.
     -->
     <changeSet id="0.0.1-001-2" author="jose" >
         <createTable tableName="superheroes" remarks="Super Hero entity   ">
@@ -27,7 +27,7 @@
     </changeSet>
 
     <!--
-        Added data to the superheros entity.
+        Added data to the superheroes entity.
     -->
     <changeSet id="0.0.1-001-3" author="jose" >
         <loadData file="db/changelog/data/0.0.1/superheroes.csv" separator=";" tableName="superheroes">
