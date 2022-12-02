@@ -7,12 +7,11 @@ pipeline {
 
     stages {
         stage('Build') {
-            sh "echo ${env.IS_SONAR}"
             steps {
                 git credentialsId: 'git-credentials',
                 branch: 'develop',
                     url: 'https://github.com/CCJose/super-heroes.git'
-
+                sh "echo ${env.IS_SONAR}"
                 sh "mvn clean install"
             }
         }
