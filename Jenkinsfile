@@ -4,7 +4,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+
+                sh "mvn clean package"
             }
         }
         stage('Test') {
