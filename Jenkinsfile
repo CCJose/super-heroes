@@ -7,7 +7,7 @@ pipeline {
 
     stages {
         stage('Build') {
-            sh 'echo ${IS_SONAR}'
+            sh 'echo ${env.IS_SONAR}'
             steps {
                 git credentialsId: 'git-credentials',
                 branch: 'develop',
