@@ -12,13 +12,12 @@ pipeline {
                 branch: 'develop',
                     url: 'https://github.com/CCJose/super-heroes.git'
 
-                sh "mvn clean"
-                sh "mvn install"
+                sh "mvn clean install"
             }
         }
         stage('Sonarqube') {
             steps {
-                sh "mvn sonar:sonar -Dsonar.projectKey=primer-despliegue -Dsonar.host.url=http://localhost:9000 -Dsonar.login=f1e68a06a2f5152f822eba2edbc6594a8182d98a"
+                sh "mvn sonar:sonar -Dsonar.projectKey=primer-despliegue -Dsonar.host.url=http://127.0.0.1:9000 -Dsonar.login=f1e68a06a2f5152f822eba2edbc6594a8182d98a"
             }
         }
         stage('Test') {
