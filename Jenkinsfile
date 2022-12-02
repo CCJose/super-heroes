@@ -8,7 +8,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                git branch: 'develop',
+                git credentialsId: 'git-credentials',
+                branch: 'develop',
                     url: 'https://github.com/CCJose/super-heroes.git'
 
                 sh "mvn clean"
