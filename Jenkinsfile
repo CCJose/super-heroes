@@ -13,6 +13,7 @@ pipeline {
                     url: 'https://github.com/CCJose/super-heroes.git'
                 sh "echo ${env.IS_SONAR}"
                 sh "mvn clean install"
+                sh "echo ${env.IS_SONAR}"
             }
         }
         stage('Sonarqube') {
