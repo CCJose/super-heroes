@@ -10,7 +10,8 @@ pipeline {
             steps {
                 git 'https://github.com/CCJose/super-heroes.git'
 
-                sh "mvn clean install"
+                sh "mvn clean"
+                sh "mvn install"
             }
         }
         stage('Test') {
