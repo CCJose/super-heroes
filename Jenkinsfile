@@ -7,7 +7,7 @@ pipeline {
 
     stages {
         stage('Build') {
-            sh "echo ${¿Quieres pasar sonar?}"
+            sh 'echo ${¿Quieres pasar sonar?}''
             steps {
                 git credentialsId: 'git-credentials',
                 branch: 'develop',
