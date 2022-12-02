@@ -18,7 +18,7 @@ pipeline {
         stage('Sonarqube') {
             when {
                 expression {
-                    return env.IS_SONAR;
+                    return env.IS_SONAR == true;
                 }
             }
             steps {
