@@ -41,7 +41,6 @@ pipeline {
                     [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
                     ssh-keyscan -t rsa,dsa 54.217.20.46 >> ~/.ssh/known_hosts
                     ssh ec2-user@54.217.20.46 bash
-                    ssh ec2-user@54.217.20.46 fuser -k 8081/tcp
                     ssh ec2-user@54.217.20.46 rm ${jar_name}
                     ssh ec2-user@54.217.20.46 wget ${bucket_url}${jar_name}
                     ssh ec2-user@54.217.20.46 java -jar ${jar_name} &
