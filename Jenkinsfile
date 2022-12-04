@@ -22,15 +22,22 @@ pipeline {
                 sh "mvn sonar:sonar -Dsonar.projectKey=primer-despliegue -Dsonar.host.url=http://172.20.0.1:9000 -Dsonar.login=f1e68a06a2f5152f822eba2edbc6594a8182d98a -Dsonar.qualitygate.wait=true"
             }
         }
+        stage("Upload S3"){
+                steps{
+                        withAWS(region:"eu-west-1", credentials:"aws_credentials"){
+                            s3Upload(file:"./target/super-heroes-0.0.1-SNAPSHOT.jar", bucket:"primer-despliegue", path:"/")
+                        }
+                }
+        }
         stage('Deploy') {
             steps {
-                sshagent(credentials: ['ec2-key']) {
-                    sh '''
-                    [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
-                    ssh-keyscan -t rsa,dsa 44.202.9.94 >> ~/.ssh/known_hosts
-                    ssh ec2-user@44.202.9.94 rm super-heroes-0.0.1-SNAPSHOT.jar
-                    '''
-                }
+//                sshagent(credentials: ['ec2-key']) {
+//                    sh '''
+//                    [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
+//                    ssh-keyscan -t rsa,dsa 44.202.9.94 >> ~/.ssh/known_hosts
+//                    ssh ec2-user@44.202.9.94 rm super-heroes-0.0.1-SNAPSHOT.jar
+//                    '''
+//                }
             }
         }
     }
