@@ -24,9 +24,9 @@ pipeline {
         }
         stage("Upload S3"){
                 steps{
-                        withAWS(region:"eu-west-1", credentials:"aws_credentials"){
-                            s3Upload(file:"./target/super-heroes-0.0.1-SNAPSHOT.jar", bucket:"primer-despliegue", path:"/")
-                        }
+                    withAWS(region:"eu-west-1", credentials:"aws_credentials"){
+                        s3Upload(file:'./target/super-heroes-0.0.1-SNAPSHOT.jar', bucket:"primer-despliegue", path:'/')
+                    }
                 }
         }
         stage('Deploy') {
