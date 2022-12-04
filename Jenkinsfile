@@ -16,7 +16,7 @@ pipeline {
                 git credentialsId: 'git-credentials',
                 branch: 'develop',
                     url: 'https://github.com/CCJose/super-heroes.git'
-//                sh "mvn clean install"
+                sh "mvn clean install"
             }
         }
         stage('Sonar') {
