@@ -16,7 +16,7 @@ pipeline {
                 git credentialsId: 'git-credentials',
                 branch: 'develop',
                     url: 'https://github.com/CCJose/super-heroes.git'
-                sh "mvn clean install"
+//                sh "mvn clean install"
             }
         }
         stage('Sonar') {
@@ -40,7 +40,7 @@ pipeline {
                     sh '''
                     [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
                     ssh-keyscan -t rsa,dsa 54.217.20.46 >> ~/.ssh/known_hosts
-                    ssh ec2-user@54.217.20.46 /sbin/fuser -k 8081
+                    ssh ec2-user@54.217.20.46 /sbin/fuser -k 8081/tcp
                     ssh ec2-user@54.217.20.46 rm ${jar_name}
                     ssh ec2-user@54.217.20.46 wget ${bucket_url}${jar_name}
                     ssh ec2-user@54.217.20.46 nohup java -jar ${jar_name} &
