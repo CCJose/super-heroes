@@ -40,6 +40,7 @@ pipeline {
                     sh '''
                     [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
                     ssh-keyscan -t rsa,dsa 54.217.20.46 >> ~/.ssh/known_hosts
+                    ssh ec2-user@54.217.20.46 kill -9 $(lsof -t -i:8081)
                     ssh ec2-user@54.217.20.46 rm ${jar_name}
                     ssh ec2-user@54.217.20.46 wget ${bucket_url}${jar_name}
                     ssh ec2-user@54.217.20.46 nohup java -jar ${jar_name} &
