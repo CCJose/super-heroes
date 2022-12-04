@@ -25,7 +25,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 sshagent(credentials: ['ec2-key']) {
-                    sh 'ssh ec2-user@44.202.9.94 ls'
+                    sh '''
+                    [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
+                    ssh-keyscan -t rsa,dsa example.com >> ~/.ssh/known_hosts
+                    ssh ec2-user@44.202.9.94 ls
+                    '''
                 }
             }
         }
