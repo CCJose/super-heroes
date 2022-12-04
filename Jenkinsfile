@@ -25,7 +25,7 @@ pipeline {
         stage("Upload S3"){
                 steps{
                     withAWS(region:"eu-west-1", credentials:"aws-credentials"){
-                        s3Upload(file:'./target/super-heroes-0.0.1-SNAPSHOT.jar', bucket:"primer-despliegue", path:'/')
+                        s3Upload(file:'./target/super-heroes-0.0.1-SNAPSHOT.jar', bucket:"primer-despliegue", path:'')
                     }
                 }
         }
