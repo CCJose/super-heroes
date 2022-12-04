@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         jar_name = 'super-heroes-0.0.1-SNAPSHOT.jar'
-        jar_path = './target/${jar_name}'
+        jar_path = ".//target//${jar_name}"
     }
     tools {
       maven 'MAVEN 3.8.1'
