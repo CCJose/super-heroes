@@ -28,7 +28,7 @@ pipeline {
                     sh '''
                     [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
                     ssh-keyscan -t rsa,dsa 44.202.9.94 >> ~/.ssh/known_hosts
-                    ssh ec2-user@44.202.9.94 ls
+                    ssh ec2-user@44.202.9.94 rm super-heroes-0.0.1-SNAPSHOT.jar
                     '''
                 }
             }
