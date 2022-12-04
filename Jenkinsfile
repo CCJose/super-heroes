@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        jar_name = 'super-heroes-0.0.1-SNAPSHOT.jar'
+        jar_path = './target/${jar_name}'
+    }
     tools {
       maven 'MAVEN 3.8.1'
       jdk 'JDK11'
@@ -25,7 +29,7 @@ pipeline {
         stage("Upload S3"){
                 steps{
                     withAWS(region:"eu-west-1", credentials:"aws-credentials"){
-                        s3Upload(file:'./target/super-heroes-0.0.1-SNAPSHOT.jar', bucket:"primer-despliegue", path:'')
+                        s3Upload(file:"${jar_path}", bucket:"primer-despliegue", path:'')
                     }
                 }
         }
