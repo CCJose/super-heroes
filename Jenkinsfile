@@ -3,6 +3,7 @@ pipeline {
     environment {
         jar_name = 'super-heroes-0.0.1-SNAPSHOT.jar'
         jar_path = ".//target//${jar_name}"
+        bucket_url = 'https://primer-despliegue.s3.eu-west-1.amazonaws.com/'
     }
     tools {
       maven 'MAVEN 3.8.1'
@@ -33,16 +34,17 @@ pipeline {
                     }
                 }
         }
-//        stage('Deploy') {
-//             steps {
-//                sshagent(credentials: ['ec2-key']) {
-//                    sh '''
-//                    [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
-//                    ssh-keyscan -t rsa,dsa 44.202.9.94 >> ~/.ssh/known_hosts
-//                    ssh ec2-user@44.202.9.94 rm super-heroes-0.0.1-SNAPSHOT.jar
-//                    '''
-//                }
-//             }
-//        }
+        stage('Deploy') {
+             steps {
+               sshagent(credentials: ['ec2-key']) {
+                    sh '''
+                    [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
+                    ssh-keyscan -t rsa,dsa 44.202.9.94 >> ~/.ssh/known_hosts
+                    ssh ec2-user@44.202.9.94 rm ${jar_name}
+                    && wget ${bucket_url}${jar_name}
+                    '''
+                }
+             }
+        }
     }
 }
