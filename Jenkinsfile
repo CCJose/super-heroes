@@ -29,8 +29,8 @@ pipeline {
                     }
                 }
         }
-        stage('Deploy') {
-            steps {
+//        stage('Deploy') {
+//             steps {
 //                sshagent(credentials: ['ec2-key']) {
 //                    sh '''
 //                    [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
@@ -38,7 +38,7 @@ pipeline {
 //                    ssh ec2-user@44.202.9.94 rm super-heroes-0.0.1-SNAPSHOT.jar
 //                    '''
 //                }
-            }
-        }
+//             }
+//        }
     }
 }
