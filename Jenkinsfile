@@ -43,7 +43,6 @@ pipeline {
                     ssh ec2-user@54.217.20.46 rm ${jar_name}
                     ssh ec2-user@54.217.20.46 wget ${bucket_url}${jar_name}
                     ssh ec2-user@54.217.20.46 nohup java -jar ${jar_name} &
-                    ssh ec2-user@54.217.20.46 sleep 1
                     '''
                 }
              }
