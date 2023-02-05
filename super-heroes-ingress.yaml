@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: super-heroes-deployment
+spec:
+  selector:
+    matchLabels:
+      greeting: super-heroes-greeting
+      version: one
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        greeting: super-heroes-greeting
+        version: one
+    spec:
+      containers:
+        - name: super-heroes
+          imagePullPolicy: Never
+          image: "super-heroes:latest"
+          env:
+            - name: "PORT"
+              value: "8081"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: super-heroes-service
+spec:
+  #  type: ClusterIp
+  type: NodePort
+  selector:
+    greeting: super-heroes-greeting
+    version: one
+  ports:
+    - port: 8090
+      targetPort: 8081
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: super-heroes-ingress
+#  annotations:
+# If the class annotation is not specified it defaults to "gce".
+#    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - http:
+        paths:
+          - pathType: Prefix
+            path: /api/v1
+            backend:
+              service:
+                name: super-heroes-service
+                port:
+                  number: 8090
