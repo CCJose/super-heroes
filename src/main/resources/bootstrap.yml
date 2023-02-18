@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: super-heroes
+  cloud:
+    config:
+      name: super-heroes-dev
+      profile: default
+      label: master
+      uri: http://localhost:8888
